@@ -9,8 +9,11 @@
         <module name="lee-framework" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="lee-framework" target="1.7" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="lee-framework" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />
   </component>
 </project>
