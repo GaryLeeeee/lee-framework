@@ -33,11 +33,15 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        super.service(req, resp);//加上这句会报405错误
 //        System.out.println("接受数据");
-        String uri = req.getRequestURI();
-        System.out.println("用户请求:"+uri);
-        System.out.println("方法:"+req.getMethod());
-        if(methodsMap.containsKey(uri)){
-            MappingHandler.handler(req,resp,uri,classMap,methodsMap,htmlMap);
+        if(req.getRequestURI().contains("."))
+            req.getRequestDispatcher("/static"+req.getRequestURI()).forward(req,resp);
+        else {
+            String uri = req.getRequestURI();
+            System.out.println("用户请求:" + uri);
+            System.out.println("方法:" + req.getMethod());
+            if (methodsMap.containsKey(uri)) {
+                MappingHandler.handler(req, resp, uri, classMap, methodsMap, htmlMap);
+            }
         }
     }
 

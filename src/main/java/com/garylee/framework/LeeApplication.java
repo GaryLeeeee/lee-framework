@@ -1,8 +1,10 @@
 package com.garylee.framework;
 
 import com.garylee.framework.servlet.DispatcherServlet;
+import com.garylee.framework.servlet.StaticServlet;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.core.StandardContext;
+import org.apache.catalina.servlets.DefaultServlet;
 import org.apache.catalina.startup.Tomcat;
 
 import javax.servlet.ServletException;
@@ -32,6 +34,8 @@ public class LeeApplication {
 
         tomcat.addServlet("", "homeServlet", new DispatcherServlet());
         context.addServletMappingDecoded("/*", "homeServlet");
+        tomcat.addServlet("", "staticServlet", new StaticServlet());
+        context.addServletMappingDecoded("/static/*", "staticServlet");
 
         tomcat.start();
         tomcat.getServer().await();
