@@ -2,6 +2,10 @@
 一款原生的SpringMVC框架
 ### 介绍
 这里用来完善之前写过的[springmvc_framework](https://github.com/GaryLeeeee/springmvc_framework)，并使用了内嵌tomcat。
+### 工作原理(SpringMVC)
+![avatar](https://github.com/GaryLeeeee/lee-framework/blob/master/%E6%B5%81%E7%A8%8B%E5%9B%BE.png)<br>
+客户端发送请求-> 前端控制器 DispatcherServlet 接受客户端请求 -> 找到处理器映射 HandlerMapping 解析请求对应的 Handler-> HandlerAdapter 会根据 Handler 来调用真正的处理器开处理请求，并处理相应的业务逻辑 -> 处理器返回一个模型视图 ModelAndView -> 视图解析器进行解析 -> 返回一个视图对象->前端控制器 DispatcherServlet 渲染数据（Model）->将得到视图对象返回给用户<br>
+`简单来说，就用户发请求，DispatcherServlet拦截器判断路径找到对应的Handler(控制器controller/静态资源请求)，controller执行对应方法内代码并返回页面(如"list"则返回"list.html")，然后找到对应html文件渲染数据，然后显示在浏览器`
 ###  特点
 * 使用注解(约定大于配置),保证代码规范
 * 反射实现
