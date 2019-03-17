@@ -10,6 +10,10 @@ import com.garylee.framework.annotation.ResponseBody;
  */
 @Controller
 public class HelloController {
+    @RequestMapping("/")
+    public String index(){
+        return "hello";
+    }
     /**
      * @RequestMapping 路由注解,代表该value的路径请求由该函数处理
      * @return 返回hello.html的内容，对应的文件存放在resources/templates中
