@@ -20,6 +20,7 @@ public class LeeApplication {
     public static void main(String[] args) throws ServletException, LifecycleException {
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(9999);
+        //这个暂时没啥用，反正是自己处理servlet
         String path = System.getProperty("user.dir")+"\\src\\main\\resources\\templates";
         tomcat.setBaseDir(path);
         tomcat.getHost().setAutoDeploy(false);
