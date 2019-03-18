@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public class StaticFactory {
     private static Map<String,String> staticMap;
-    private static String staticPath = Config.projectPath+"\\src\\main\\resources\\static";
+    private static String staticPath = Config.targetPath+"\\static";
     public static void getStatic(){
         staticMap = new HashMap<>();
         File file = new File(staticPath);

@@ -15,7 +15,7 @@ public class HtmlFactory {
     public static Map<String,String> htmlMap;
     public static Map<String,String> getHtml(){
         //Tomcat工作缓存区，相当于安装板的root目录所在地，在这里放在工程目录下。
-        File file = new File(Config.projectPath+"\\src\\main\\resources\\templates");
+        File file = new File(Config.targetPath+"\\templates");
         htmlMap = new HashMap<>();
         initMap(file);
         return htmlMap;

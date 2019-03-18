@@ -3,6 +3,7 @@ package com.garylee.framework.structure;
 import com.garylee.framework.annotation.Controller;
 import com.garylee.framework.annotation.RequestMapping;
 import com.garylee.framework.annotation.ResponseBody;
+import com.garylee.framework.utils.Config;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -18,10 +19,9 @@ public class ClassFactory {
     private static Set<Class> classSet = new HashSet<>();//存放所有类
     private static Map<String,MethodMap> methodMap;//存放url和对应的method
     private static Map<String,Class> classMap;//存放url和对应的class
-    private static String projectPath = "com\\garylee\\framework";//包路径(修改为src)
-    private static String path = System.getProperty("user.dir") + "\\src\\main\\java\\com\\garylee\\framework";
+    private static String projectPath = "\\com\\garylee\\framework";//包路径(修改为src)
     public static void scan(){
-        initSet(path);//扫描所有类并存放到set中
+        initSet(Config.targetPath+projectPath);//扫描(target)所有类(class)并存放到set中
         methodMap = new HashMap<>();
         classMap = new HashMap<>();
         for(Class clazz:classSet){
@@ -52,10 +52,13 @@ public class ClassFactory {
             //如果是文件夹，则递归调用(即进行子文件夹)
             if(file.isDirectory())
                 initSet(file.getAbsolutePath());
-            if(file.getName().contains(".java")){
+            if(file.getName().contains(".class")){
                 String paths = file.getAbsolutePath();
                 //文件名(包括package,如com.garylee.framework.annotation.Controller)
-                String className = paths.substring(paths.indexOf(projectPath)).replace(".java","").replace(File.separator,".");
+                //+1,去掉如com.garylee.framework.annotation.Controller前面的一点.
+                String className = paths.substring(paths.indexOf(projectPath)+1)
+                        .replace(".class","")
+                        .replace(File.separator,".");
 //                System.out.println(className);//Class.forName的值
 //                System.out.println(Class.forName(className));
                 try {

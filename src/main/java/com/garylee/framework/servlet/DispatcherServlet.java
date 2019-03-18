@@ -60,8 +60,8 @@ public class DispatcherServlet extends HttpServlet {
                 FileItem item = (FileItem) iter.next();
                 if(!item.isFormField()){
                     filename = System.currentTimeMillis()+".jpg";
-                    //图片路径
-                    String photoFolder = Config.projectPath+"\\src\\main\\resources\\static";
+                    //图片路径(存放在target下，原src没同步，可自己添加)
+                    String photoFolder = Config.targetPath+"\\static";
                     File file = new File(photoFolder,filename);
                     file.getParentFile().mkdirs();
                     InputStream is = item.getInputStream();
