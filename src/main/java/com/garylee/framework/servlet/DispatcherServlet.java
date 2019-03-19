@@ -1,6 +1,7 @@
 package com.garylee.framework.servlet;
 
 import com.garylee.framework.handler.MappingHandler;
+import com.garylee.framework.ioc.BeanFactoryImpl;
 import com.garylee.framework.structure.ClassFactory;
 import com.garylee.framework.structure.HtmlFactory;
 import com.garylee.framework.structure.MethodMap;
@@ -30,10 +31,14 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         System.out.println("Servlet初始化ing...");
+        new BeanFactoryImpl().init();
+        System.out.println("bean初始化完毕!");
+
         ClassFactory.scan();
         classMap = ClassFactory.getClassMap();
         methodsMap = ClassFactory.getMethodMap();
         htmlMap = HtmlFactory.getHtml();
+
         System.out.println("Servlet初始化完成!");
     }
     @Override

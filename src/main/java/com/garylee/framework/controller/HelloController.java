@@ -1,8 +1,10 @@
 package com.garylee.framework.controller;
 
+import com.garylee.framework.annotation.Autowired;
 import com.garylee.framework.annotation.Controller;
 import com.garylee.framework.annotation.RequestMapping;
 import com.garylee.framework.annotation.ResponseBody;
+import com.garylee.framework.ioc.Property;
 
 /**
  * Created by GaryLee on 2018-10-25 23:12.
@@ -10,6 +12,8 @@ import com.garylee.framework.annotation.ResponseBody;
  */
 @Controller
 public class HelloController {
+    @Autowired
+    Property property;
     @RequestMapping("/")
     public String index(){
         return "hello";

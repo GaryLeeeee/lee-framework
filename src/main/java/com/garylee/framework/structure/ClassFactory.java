@@ -1,11 +1,16 @@
 package com.garylee.framework.structure;
 
+import com.garylee.framework.annotation.Autowired;
 import com.garylee.framework.annotation.Controller;
 import com.garylee.framework.annotation.RequestMapping;
 import com.garylee.framework.annotation.ResponseBody;
+import com.garylee.framework.ioc.Bean;
+import com.garylee.framework.ioc.BeanFactory;
+import com.garylee.framework.ioc.BeanFactoryImpl;
 import com.garylee.framework.utils.Config;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,6 +25,7 @@ public class ClassFactory {
     private static Map<String,MethodMap> methodMap;//存放url和对应的method
     private static Map<String,Class> classMap;//存放url和对应的class
     private static String projectPath = "\\com\\garylee\\framework";//包路径(修改为src)
+    private static BeanFactory beanFactory = new BeanFactoryImpl();
     public static void scan(){
         initSet(Config.targetPath+projectPath);//扫描(target)所有类(class)并存放到set中
         methodMap = new HashMap<>();
@@ -41,6 +47,17 @@ public class ClassFactory {
                         System.out.println(requestMapping.value()+"初始化成功!");
 
                         classMap.put(requestMapping.value(),clazz);
+                    }
+                }
+                //ioc
+                Field[] fields = clazz.getDeclaredFields();
+                for(Field field:fields){
+                    //如果当前字段被Autowired修饰
+                    if(field.isAnnotationPresent(Autowired.class)){
+                        //目前只创建实例，并不传值(String为需要Autowired的类名如UserService)
+                        Object o = beanFactory.getBean(field.getType().getSimpleName());
+                        System.out.println(field.getName()+"实例为:"+o);
+                        Object o2 = beanFactory.getBean(field.getType().getSimpleName());
                     }
                 }
             }

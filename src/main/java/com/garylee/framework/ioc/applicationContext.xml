@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans>
+    <bean name="User" class="com.garylee.framework.domain.User" >
+        <property name="name" value="123"></property>
+    </bean>
+
+    <bean name="teacher" class="com.wang.entity.Teacher">
+        <property name="student" ref="student"></property>
+    </bean>
+    <bean name="person" class="com.wang.entity.Person" scope="prototype">
+        <property name="teacher" ref="teacher"></property>
+        <property name="student" ref="student"></property>
+    </bean>
+</beans>
